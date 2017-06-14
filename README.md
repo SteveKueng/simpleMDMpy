@@ -3,7 +3,7 @@ python lib for simpleMDM API
 
 ## usage
 clone the repo and download the simpleMDMpy.
-copy the "simpleMDMpy" Folder someware you need it.
+copy the "simpleMDMpy" Folder somewhere you need it.
 
 import simpleMDMpy
 
