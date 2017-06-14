@@ -2,7 +2,7 @@
 
 import simpleMDM
 
-class devices(simpleMDM.connection):
+class deviceGroups(simpleMDM.connection):
     def __init__(self, apiKey):
         simpleMDM.connection.__init__(self, apiKey)
         self.url = self._url("/device_groups")
