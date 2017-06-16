@@ -18,15 +18,15 @@ class connection:
             raise ApiError('GET {}'.format(resp.status_code), url)
         return resp.json()
     
-    def _patchData(self, url, data):
-        resp = requests.patch(url, data, auth=(self.apiKey, ""))
+    def _patchData(self, url, data, files=None):
+        resp = requests.patch(url, data, auth=(self.apiKey, ""), files=files)
         if resp.status_code != 200:
             raise ApiError('PATCH {}'.format(resp.status_code), url)
         return resp
     
-    def _postData(self, url, data):
-        resp = requests.post(url, data, auth=(self.apiKey, ""))
-        if resp.status_code != 200:
+    def _postData(self, url, data, files=None):
+        resp = requests.post(url, data, auth=(self.apiKey, ""), files=files)
+        if resp.status_code != 200 and resp.status_code != 201:
             raise ApiError('POST {}'.format(resp.status_code), url)
         return resp
     

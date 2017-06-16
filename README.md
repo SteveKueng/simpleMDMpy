@@ -1,6 +1,8 @@
 # simpleMDMpy
 python lib for simpleMDM API
 
+https://simplemdm.com/docs/api
+
 ## usage
 clone the repo and download the simpleMDMpy.
 copy the "simpleMDMpy" Folder somewhere you need it.
@@ -14,6 +16,16 @@ apiKey = "adfasdf4rwrgasdfas"
 account = simpleMDMpy.account(apiKey)
 account.setAcountDetais(name="Test Comp", country_code="US")
 print account.getAcountDetais()
+
+
+apps = simpleMDMpy.apps(apiKey)
+print apps.getApp()
+
+apps.createApp(name="MyTestApp", appStoreID="1090161858", bundleID="com.myCompany.MyApp1", binary="/path/to/pkg/or/ipa")
+
+apps.updateApp(appID="123532", binary="/path/to/ipa", name="MyNewAppName")
+
+apps.deleteApp(appID="123532")
 
 
 devices = simpleMDMpy.devices(apiKey)
