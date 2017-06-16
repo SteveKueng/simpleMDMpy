@@ -19,7 +19,8 @@ print account.getAcountDetais()
 
 
 apps = simpleMDMpy.apps(apiKey)
-print apps.getApp()
+print apps.getApp('all')
+print apps.getApp('123532')
 
 apps.createApp(name="MyTestApp", appStoreID="1090161858", bundleID="com.myCompany.MyApp1", binary="/path/to/pkg/or/ipa")
 
