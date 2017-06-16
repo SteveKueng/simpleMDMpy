@@ -20,7 +20,7 @@ class connection:
     
     def _patchData(self, url, data, files=None):
         resp = requests.patch(url, data, auth=(self.apiKey, ""), files=files)
-        if resp.status_code != 200:
+        if resp.status_code != 200 and resp.status_code != 204:
             raise ApiError('PATCH {}'.format(resp.status_code), url)
         return resp
     
