@@ -30,5 +30,11 @@ class connection:
             raise ApiError('POST {}'.format(resp.status_code), url)
         return resp
     
+    def _putData(self, url, data, files=None):
+        resp = requests.put(url, data, auth=(self.apiKey, ""), files=files)
+        if resp.status_code != 200 and resp.status_code != 201:
+            raise ApiError('PUT {}'.format(resp.status_code), url)
+        return resp
+    
     def _deleteData(self, url):
         return requests.delete(url, auth=(self.apiKey, ""))
