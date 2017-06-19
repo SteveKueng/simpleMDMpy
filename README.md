@@ -7,6 +7,7 @@ https://simplemdm.com/docs/api
 clone the repo and download the simpleMDMpy.
 copy the "simpleMDMpy" Folder somewhere you need it.
 
+### Account
 ```python
 import simpleMDMpy
 
@@ -16,6 +17,13 @@ apiKey = "adfasdf4rwrgasdfas"
 account = simpleMDMpy.account(apiKey)
 account.setAcountDetais(name="Test Comp", country_code="US")
 print account.getAcountDetais()
+```
+
+### Apps
+```python
+import simpleMDMpy
+
+apiKey = "adfasdf4rwrgasdfas"
 
 
 apps = simpleMDMpy.apps(apiKey)
@@ -27,6 +35,13 @@ apps.createApp(name="MyTestApp", appStoreID="1090161858", bundleID="com.myCompan
 apps.updateApp(appID="123532", binary="/path/to/ipa", name="MyNewAppName")
 
 apps.deleteApp(appID="123532")
+```
+
+### Devices
+```python
+import simpleMDMpy
+
+apiKey = "adfasdf4rwrgasdfas"
 
 
 devices = simpleMDMpy.devices(apiKey)
@@ -48,6 +63,13 @@ devices.clearPasscodeDevice(deviceID="1234")
 devices.wipeDevice(deviceID="1234")
 
 devices.pushAppsDevice(deviceID="1234")
+```
+
+### Device Groups
+```python
+import simpleMDMpy
+
+apiKey = "adfasdf4rwrgasdfas"
 
 
 deviceGroups = simpleMDMpy.deviceGroups(apiKey)
@@ -55,4 +77,48 @@ print deviceGroups.getDeviceGroup('all')
 print deviceGroups.getDeviceGroup(deviceGoupID="4312")
 
 deviceGroups.assignDevice(deviceID="1234", deviceGoupID="4312")
+```
+
+### Installed Apps
+```python
+import simpleMDMpy
+
+apiKey = "adfasdf4rwrgasdfas"
+
+
+installedApps = simpleMDMpy.installedApps(apiKey)
+
+print installedApps.getApp(installedAppID="234123")
+
+installedApps.deleteApp(installedAppID="234123")
+```
+
+### Managed App Configs
+```python
+import simpleMDMpy
+
+apiKey = "adfasdf4rwrgasdfas"
+
+
+managedAppConfigs = simpleMDMpy.managedAppConfigs(apiKey)
+
+print managedAppConfigs.getManagedConfigs(appID="12323")
+
+managedAppConfigs.pushUpdates(appID="12323")
+```
+
+### Push Certificate
+```python
+import simpleMDMpy
+
+apiKey = "adfasdf4rwrgasdfas"
+
+
+pushCertificate = simpleMDMpy.pushCertificate(apiKey)
+
+print pushCertificate.getPushCertificate()
+
+updateCertificate(file=/path/to/cert, appleID="my.apple.id.com")
+
+print pushCertificate.getSignedCSR()
 ```
