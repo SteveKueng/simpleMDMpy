@@ -4,8 +4,11 @@ python lib for simpleMDM API
 https://simplemdm.com/docs/api
 
 ## usage
-clone the repo and download the simpleMDMpy.
-copy the "simpleMDMpy" Folder somewhere you need it.
+``` 
+git clone https://github.com/SteveKueng/simpleMDMpy
+python simpleMDMpy/setup.py install
+
+```
 
 ### Account
 ```python
