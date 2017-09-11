@@ -5,8 +5,7 @@ https://simplemdm.com/docs/api
 
 ## usage
 ``` 
-git clone https://github.com/SteveKueng/simpleMDMpy
-python simpleMDMpy/setup.py install
+pip install simpleMDMpy
 
 ```
 
