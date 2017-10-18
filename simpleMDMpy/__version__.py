@@ -2,7 +2,7 @@
 __title__ = 'simpleMDMpy'
 __description__ = 'Python lib for simpleMDM.'
 __url__ = 'https://github.com/SteveKueng/simpleMDMpy'
-__version__ = '1.0'
+__version__ = '1.1'
 __author__ = 'Steve Küng'
 __author_email__ = 'steve.kueng@gmail.com'
 __license__ = 'Apache 2.0'

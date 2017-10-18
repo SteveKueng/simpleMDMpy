@@ -12,8 +12,8 @@ class connection:
     def _url(self, path):
         return 'https://a.simplemdm.com/api/v1' + path
 
-    def _getData(self, url):
-        resp = requests.get(url, auth=(self.apiKey, ""))
+    def _getData(self, url, data=None):
+        resp = requests.get(url, data, auth=(self.apiKey, ""))
         if resp.status_code != 200:
             raise ApiError('GET {}'.format(resp.status_code), url)
         return resp.json()

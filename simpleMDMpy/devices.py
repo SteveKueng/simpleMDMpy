@@ -7,12 +7,15 @@ class devices(simpleMDM.connection):
         simpleMDM.connection.__init__(self, apiKey)
         self.url = self._url("/devices")
 
-    def getDevice(self, deviceID="all"):
-        """retruns a device specified by id. If no ID is specified all devices will be returned"""
+    def getDevice(self, deviceID="all", search=None):
+        """retruns a device specified by id. If no ID or search is specified all devices will be returned"""
         url = self.url
-        if not deviceID == "all":
+        data = None
+        if search:
+            data = {'search': search}
+        elif not deviceID == "all":
             url = url + "/" + deviceID
-        return self._getData(url)
+        return self._getData(url, data)
 
     def listInstalledApps(self, deviceID):
         url = self.url + "/" + deviceID + "/installed_apps"
