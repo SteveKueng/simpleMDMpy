@@ -14,31 +14,21 @@ class connection:
 
     def _getData(self, url, data=None):
         resp = requests.get(url, data, auth=(self.apiKey, ""))
-        if resp.status_code 200 <= number <= 207:
-            return resp.json()
-        raise ApiError('GET {}'.format(resp.status_code), url)
+        return resp.json()
         
     
     def _patchData(self, url, data, files=None):
         resp = requests.patch(url, data, auth=(self.apiKey, ""), files=files)
-        if resp.status_code 200 <= number <= 207:
-            return resp
-        raise ApiError('PATCH {}'.format(resp.status_code), url)
+        return resp
     
     def _postData(self, url, data, files=None):
         resp = requests.post(url, data, auth=(self.apiKey, ""), files=files)
-        if resp.status_code 200 <= number <= 207:
-            return resp
-        raise ApiError('POST {}'.format(resp.status_code), url)
+        return resp
         
     
     def _putData(self, url, data, files=None):
         resp = requests.put(url, data, auth=(self.apiKey, ""), files=files)
-        if resp.status_code 200 <= number <= 207:
-            return resp
-        raise ApiError('PUT {}'.format(resp.status_code), url)
+        return resp
     
     def _deleteData(self, url):
-        if resp.status_code 200 <= number <= 207:
-            return requests.delete(url, auth=(self.apiKey, ""))
-        raise ApiError('DELETE {}'.format(resp.status_code), url)
+        return requests.delete(url, auth=(self.apiKey, ""))
