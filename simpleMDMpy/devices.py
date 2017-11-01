@@ -34,9 +34,9 @@ class devices(simpleMDM.connection):
         url = self.url + "/" + deviceID
         return self._deleteData(url)
     
-    def lockDevice(self, deviceID, message, phone_number):
+    def lockDevice(self, deviceID, message, phone_number, pin=None):
         url = self.url + "/" + deviceID + "/lock"
-        data = {'message': message, 'phone_number': phone_number}
+        data = {'message': message, 'phone_number': phone_number, 'pin':pin}
         return self._postData(url, data)
     
     def clearPasscodeDevice(self, deviceID):
@@ -51,5 +51,20 @@ class devices(simpleMDM.connection):
     
     def pushAppsDevice(self, deviceID):
         url = self.url + "/" + deviceID + "/push_apps"
+        data = {}
+        return self._postData(url, data)
+
+    def restcartDevice(self, deviceID):
+        url = self.url + "/" + deviceID + "/restart"
+        data = {}
+        return self._postData(url, data)
+
+    def shutdownDevice(self, deviceID):
+        url = self.url + "/" + deviceID + "/shutdown"
+        data = {}
+        return self._postData(url, data)
+
+    def refreshDevice(self, deviceID):
+        url = self.url + "/" + deviceID + "/refresh"
         data = {}
         return self._postData(url, data)
