@@ -14,7 +14,7 @@ class connection:
 
     def _getData(self, url, data=None):
         resp = requests.get(url, data, auth=(self.apiKey, ""))
-        return resp.json()
+        return resp
         
     
     def _patchData(self, url, data, files=None):
