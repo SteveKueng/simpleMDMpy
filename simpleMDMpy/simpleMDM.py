@@ -25,10 +25,13 @@ class connection:
             respJson = resp.json()
             if not resp.status_code in range(200,207):
                 break
-            respData = respData + respJson['data']
-            has_more = respJson['has_more']
-            id = resp.json()['data'][-1].get('id')
-        
+            has_more = respJson.get('has_more', None)
+            if has_more == None:
+                respData = respJson['data']
+                break
+            else:
+                respData = respData + respJson['data']
+                id = resp.json()['data'][-1].get('id')
         respJson['data'] = respData
         resp.encoding, resp._content = 'utf8', json.dumps(respJson)
         return resp
