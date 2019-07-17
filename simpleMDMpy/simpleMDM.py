@@ -48,5 +48,5 @@ class connection:
         resp = requests.put(url, data, auth=(self.apiKey, ""), files=files, proxies=self.proxyDict)
         return resp
     
-    def _deleteData(self, url):
+    def _deleteData(self, url, data, files=None):
         return requests.delete(url, auth=(self.apiKey, ""), proxies=self.proxyDict)
