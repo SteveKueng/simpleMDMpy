@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v3.0.0
+
+- Closes #3
+
+## Changed
+
+- removed forced encoding for `GET` responses
+- added some pylint comments
+
 ## v2.1.0
 
 ### Issues

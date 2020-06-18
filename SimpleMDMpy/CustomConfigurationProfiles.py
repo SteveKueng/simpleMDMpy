@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """ Custom Configuration Profiles module """
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 
@@ -26,8 +27,8 @@ class CustomConfigurationProfiles(SimpleMDMpy.SimpleMDM.Connection):
             data['attribute_support'] = attribute_support
         return self._post_data(url, data, files)
 
-    def update_profile(self, profile_id, name=None, mobileconfig=None,\
-    user_scope=None, attribute_support=None):
+    def update_profile(self, profile_id, name=None, mobileconfig=None, # pylint: disable=too-many-arguments
+                       user_scope=None, attribute_support=None):
         """update a config file"""
         url = self.url + "/" + profile_id
         data = {}

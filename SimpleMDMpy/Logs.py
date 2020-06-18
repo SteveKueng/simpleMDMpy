@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """Logs module for SimpleMDMpy"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 

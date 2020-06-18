@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """ apps module for SimpleMDMpy"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 
@@ -46,4 +47,4 @@ class Apps(SimpleMDMpy.SimpleMDM.Connection):
         """delete an app"""
         url = self.url + "/" + app_id
         data = {}
-        return self._delete_data(url, data)
+        return self._delete_data(url, data) #pylint: disable=too-many-function-args

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """module for interacting with dep server configurations"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 
