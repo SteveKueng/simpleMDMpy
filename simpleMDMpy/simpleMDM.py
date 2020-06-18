@@ -1,52 +1,65 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 
-import requests
+"""base module for calling simplemdm api"""
+
 import json
+import requests
 
 class ApiError(Exception):
+    """Catch for API Error"""
     pass
 
-class connection:
+class Connection(): #pylint: disable=old-style-class,too-few-public-methods
+    """create connection with api key"""
     proxyDict = dict()
 
-    def __init__(self, apiKey):
-        self.apiKey = apiKey
+    def __init__(self, api_key):
+        self.api_key = api_key
 
-    def _url(self, path):
+    def _url(self, path): #pylint: disable=no-self-use
+        """base api url"""
         return 'https://a.simplemdm.com/api/v1' + path
 
-    def _getData(self, url, data=None):
-        id = 0
+    def _get_data(self, url, data=None):
+        """GET call to SimpleMDM API"""
+        id = 0 #pylint: disable=invalid-name,redefined-builtin
         has_more = True
-        respData = []
+        resp_data = []
         while has_more:
             url = url + "?limit=20&starting_after=" + str(id)
-            resp = requests.get(url, data, auth=(self.apiKey, ""), proxies=self.proxyDict)
-            respJson = resp.json()
-            if not resp.status_code in range(200,207):
+            resp = requests.get(url, data, auth=(self.api_key, ""), proxies=self.proxyDict)
+            resp_json = resp.json()
+            if not resp.status_code in range(200, 207):
                 break
-            has_more = respJson.get('has_more', None)
-            if has_more == None:
-                respData = respJson['data']
+            has_more = resp_json.get('has_more', None)
+            if has_more is None:
+                resp_data = resp_json['data']
                 break
             else:
-                respData = respData + respJson['data']
-                id = resp.json()['data'][-1].get('id')
-        respJson['data'] = respData
-        resp.encoding, resp._content = 'utf8', json.dumps(respJson)
+                resp_data = resp_data + resp_json['data']
+                id = resp.json()['data'][-1].get('id') #pylint: disable=invalid-name
+        resp_json['data'] = resp_data
+        resp.encoding, resp._content = 'utf8', json.dumps(resp_json)
         return resp
-        
-    def _patchData(self, url, data, files=None):
-        resp = requests.patch(url, data, auth=(self.apiKey, ""), files=files, proxies=self.proxyDict)
+
+    def _patch_data(self, url, data, files=None):
+        """PATCH call to SimpleMDM API"""
+        resp = requests.patch(url, data, auth=(self.api_key, ""), \
+            files=files, proxies=self.proxyDict)
         return resp
-    
-    def _postData(self, url, data, files=None):
-        resp = requests.post(url, data, auth=(self.apiKey, ""), files=files, proxies=self.proxyDict)
+
+    def _post_data(self, url, data, files=None):
+        """POST call to SimpleMDM API"""
+        resp = requests.post(url, data, auth=(self.api_key, ""), \
+            files=files, proxies=self.proxyDict)
         return resp
-        
-    def _putData(self, url, data, files=None):
-        resp = requests.put(url, data, auth=(self.apiKey, ""), files=files, proxies=self.proxyDict)
+
+    def _put_data(self, url, data, files=None):
+        """PUT call to SimpleMDM API"""
+        resp = requests.put(url, data, auth=(self.api_key, ""), \
+            files=files, proxies=self.proxyDict)
         return resp
-    
-    def _deleteData(self, url, data, files=None):
-        return requests.delete(url, auth=(self.apiKey, ""), proxies=self.proxyDict)
+
+    def _delete_data(self, url):
+        """DELETE call to SimpleMDM API"""
+        return requests.delete(url, auth=(self.api_key, ""), proxies=self.proxyDict)

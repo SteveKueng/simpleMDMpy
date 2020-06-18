@@ -1,70 +1,122 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 
-import simpleMDM
+"""devices module for SimpleMDMpy"""
 
-class devices(simpleMDM.connection):
-    def __init__(self, apiKey):
-        simpleMDM.connection.__init__(self, apiKey)
+import SimpleMDMpy.SimpleMDM
+
+class Devices(SimpleMDMpy.SimpleMDM.Connection):
+    """devices module for SimpleMDMpy"""
+    def __init__(self, api_key):
+        SimpleMDMpy.SimpleMDM.Connection.__init__(self, api_key)
         self.url = self._url("/devices")
 
-    def getDevice(self, deviceID="all", search=None):
-        """retruns a device specified by id. If no ID or search is specified all devices will be returned"""
+    def get_device(self, device_id="all", search=None):
+        """Returns a device specified by id. If no ID or search is
+        specified all devices will be returned"""
         url = self.url
         data = None
         if search:
             data = {'search': search}
-        elif not deviceID == "all":
-            url = url + "/" + deviceID
-        return self._getData(url, data)
+        elif device_id != 'all':
+            url = url + "/" + device_id
+        return self._get_data(url, data)
 
-    def listInstalledApps(self, deviceID):
-        url = self.url + "/" + deviceID + "/installed_apps"
-        return self._getData(url)
+    def create_device(self, name, group_id):
+        """Creates a new device object in SimpleMDM. The response
+        body includes an enrollment URL that can be used once to
+        enroll a physical device."""
+        data = {'name': name, 'group_id': group_id}
+        return self._post_data(self.url, data)
 
-    def createDevice(self, name, groupID):
-        data = {'name': name, 'group_id': groupID}
-        return self._postData(self.url, data)
-    
-    def updateDevice(self, name, deviceID):
-        url = self.url + "/" + deviceID
+    def update_device(self, name, device_id):
+        """Update the SimpleMDM name or device name of a device object."""
+        url = self.url + "/" + device_id
         data = {'name': name}
-        return self._patchData(url, data)
+        return self._patch_data(url, data)
 
-    def deleteDevice(self, deviceID):
-        url = self.url + "/" + deviceID
-        return self._deleteData(url)
-    
-    def lockDevice(self, deviceID, message, phone_number, pin=None):
-        url = self.url + "/" + deviceID + "/lock"
+    def delete_device(self, device_id):
+        """Unenroll a device and remove it from the account."""
+        url = self.url + "/" + device_id
+        data = {}
+        return self._delete_data(url, data)
+
+    def list_installed_apps(self, device_id):
+        """Returns a listing of the apps installed on a device."""
+        url = self.url + "/" + device_id + "/installed_apps"
+        return self._get_data(url)
+
+    def push_apps_device(self, device_id):
+        """You can use this method to push all assigned apps
+        to a device that are not already installed."""
+        url = self.url + "/" + device_id + "/push_apps"
+        data = {}
+        return self._post_data(url, data)
+
+    def restart_device(self, device_id):
+        """This command sends a restart command to the device."""
+        url = self.url + "/" + device_id + "/restart"
+        data = {}
+        return self._post_data(url, data)
+
+    def shutdown_device(self, device_id):
+        """This command sends a shutdown command to the device."""
+        url = self.url + "/" + device_id + "/shutdown"
+        data = {}
+        return self._post_data(url, data)
+
+    def lock_device(self, device_id, message, phone_number, pin=None):
+        """You can use this method to lock a device and optionally display
+        a message and phone number. The device can be unlocked with the
+        existing passcode of the device."""
+        url = self.url + "/" + device_id + "/lock"
         data = {'message': message, 'phone_number': phone_number, 'pin':pin}
-        return self._postData(url, data)
-    
-    def clearPasscodeDevice(self, deviceID):
-        url = self.url + "/" + deviceID + "/clear_passcode"
-        data = {}
-        return self._postData(url, data)
-    
-    def wipeDevice(self, deviceID):
-        url = self.url + "/" + deviceID + "/wipe"
-        data = {}
-        return self._postData(url, data)
-    
-    def pushAppsDevice(self, deviceID):
-        url = self.url + "/" + deviceID + "/push_apps"
-        data = {}
-        return self._postData(url, data)
+        return self._post_data(url, data)
 
-    def restcartDevice(self, deviceID):
-        url = self.url + "/" + deviceID + "/restart"
+    def clear_passcode_device(self, device_id):
+        """You can use this method to unlock and remove the passcode of a device."""
+        url = self.url + "/" + device_id + "/clear_passcode"
         data = {}
-        return self._postData(url, data)
+        return self._post_data(url, data)
 
-    def shutdownDevice(self, deviceID):
-        url = self.url + "/" + deviceID + "/shutdown"
+    def clear_firmware_password(self, device_id):
+        """You can use this method to remove the firmware password from a device.
+        The firmware password must have been originally set using SimpleMDM for
+        this to complete successfully."""
+        url = self.url + "/" + device_id + "/clear_firmware_password"
         data = {}
-        return self._postData(url, data)
+        return self._post_data(url, data)
 
-    def refreshDevice(self, deviceID):
-        url = self.url + "/" + deviceID + "/refresh"
+    def wipe_device(self, device_id):
+        """You can use this method to erase all content and settings stored on a
+        device. The device will be unenrolled from SimpleMDM and returned to a
+        factory default configuration."""
+        url = self.url + "/" + device_id + "/wipe"
         data = {}
-        return self._postData(url, data)
+        return self._post_data(url, data)
+
+    def update_os(self, device_id):
+        """You can use this method to update a device to the latest OS version.
+        Currently supported by iOS devices only."""
+        url = self.url + "/" + device_id + "/update_os"
+        data = {}
+        return self._post_data(url, data)
+
+    def refresh_device(self, device_id):
+        """Request a refresh of the device information and app inventory.
+        SimpleMDM will update the inventory information when the device responds
+        to the request."""
+        url = self.url + "/" + device_id + "/refresh"
+        data = {}
+        return self._post_data(url, data)
+
+    def get_custom_attribute(self, device_id, custom_attribute_name):
+        """get a devices custom attributes"""
+        url = self.url + "/" + device_id + "/custom_attribute_values/" + custom_attribute_name
+        data = {}
+        return self._get_data(url, data)
+
+    def set_custom_attribute(self, value, device_id, custom_attribute_name):
+        """set a devices custom attribute to a specific value"""
+        url = self.url + "/" + device_id + "/custom_attribute_values/" + custom_attribute_name
+        data = {'value': value}
+        return self._get_data(url, data)
