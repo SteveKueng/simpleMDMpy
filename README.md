@@ -363,13 +363,16 @@ class InstalledApps(SimpleMDMpy.SimpleMDM.Connection)
 ### Logs
 
 ```python
-
-import SimpleMDMpy
-
-api_key = "adfasdf4rwrgasdfas"
-
-Logs = SimpleMDMpy.Logs(api_key)
-Logs.get_logs()
+class Logs(SimpleMDMpy.SimpleMDM.Connection)
+ |  GET all the LOGS
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, api_key)
+ |
+ |  get_logs(self)
+ |      And I mean all the LOGS, before pagination
+ |
 
 ```
 
