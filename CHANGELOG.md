@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v2.1.0
+
+### Issues
+
+- Closes #5
+
+### Changed
+
+- fixed module names
+
 ## v2.0.0
 
 ### Issues
