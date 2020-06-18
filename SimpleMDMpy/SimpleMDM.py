@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
 """base module for calling simplemdm api"""
+#pylint: disable=invalid-name
 
+from builtins import str
+from builtins import range
+from builtins import object
 import json
 import requests
 
@@ -9,7 +13,7 @@ class ApiError(Exception):
     """Catch for API Error"""
     pass
 
-class Connection(): #pylint: disable=old-style-class,too-few-public-methods
+class Connection(object): #pylint: disable=old-style-class,too-few-public-methods
     """create connection with api key"""
     proxyDict = dict()
 
@@ -39,7 +43,6 @@ class Connection(): #pylint: disable=old-style-class,too-few-public-methods
                 resp_data = resp_data + resp_json['data']
                 id = resp.json()['data'][-1].get('id') #pylint: disable=invalid-name
         resp_json['data'] = resp_data
-        resp.encoding, resp._content = 'utf8', json.dumps(resp_json)
         return resp
 
     def _patch_data(self, url, data, files=None):
