@@ -1,16 +1,33 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 
-import simpleMDM
+"""managed app configs module for SimpleMDMpy"""
 
-class managedAppConfigs(simpleMDM.connection):
-    def __init__(self, apiKey):
-        simpleMDM.connection.__init__(self, apiKey)
+import SimpleMDMpy.SimpleMDM
+
+class ManagedAppConfigs(SimpleMDMpy.SimpleMDM.Connection):
+    """Create, modify, and remove the managed app configuration
+    associated with an app."""
+    def __init__(self, api_key):
+        SimpleMDMpy.SimpleMDM.Connection.__init__(self, api_key)
         self.url = self._url("/apps")
 
-    def getManagedConfigs(self, appID):
-        url = self.url + "/" + appID + "/managed_configs"
-        return self._getData(url)
+    def get_managed_configs(self, app_id):
+        """"Retrieve the managed configs for an app."""
+        url = self.url + "/" + app_id + "/managed_configs"
+        data = {}
+        return self._get_data(url, data)
 
-    def pushUpdates(self, appID):
-        url = self.url + "/" + appID + "/managed_configs/push"
-        return self._postData(url)
+    def push_updates(self, app_id):
+        """Push any updates to the managed configurations
+        for an app to all devices. This is not necessary
+        when making managed config changes through the UI.
+        This is necessary after making changes through the API."""
+        url = self.url + "/" + app_id + "/managed_configs/push"
+        data = {}
+        return self._post_data(url, data)
+
+    def delete_config(self, app_id, managed_config_id):
+        """Delete managed config from an app by ID."""
+        url = self.url + "/" + app_id + "/managed_configs/" + managed_config_id
+        data = {}
+        return self._delete_data(url, data)
