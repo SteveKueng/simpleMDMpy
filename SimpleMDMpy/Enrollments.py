@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """enrollments module for SimpleMDMpy"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 
@@ -28,4 +29,4 @@ class Enrollments(SimpleMDMpy.SimpleMDM.Connection):
         """delete enrollment"""
         url = self.url + "/" + enrollment_id
         data = {}
-        return self._delete_data(url, data)
+        return self._delete_data(url, data) #pylint: disable=too-many-function-args

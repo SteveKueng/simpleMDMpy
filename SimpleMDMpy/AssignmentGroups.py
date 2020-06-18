@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """assignment groups module for SimpleMDMpy"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 

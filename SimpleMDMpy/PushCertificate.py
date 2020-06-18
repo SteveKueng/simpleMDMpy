@@ -2,6 +2,7 @@
 
 """Methods related to the Apple Push Notification
 Certificate utilized by the account."""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 

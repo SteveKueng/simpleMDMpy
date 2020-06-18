@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """devices module for SimpleMDMpy"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 
@@ -38,7 +39,7 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection):
         """Unenroll a device and remove it from the account."""
         url = self.url + "/" + device_id
         data = {}
-        return self._delete_data(url, data)
+        return self._delete_data(url, data) #pylint: disable=too-many-function-args
 
     def list_installed_apps(self, device_id):
         """Returns a listing of the apps installed on a device."""

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """custom attributes module"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 
@@ -26,4 +27,3 @@ class CustomAttributes(SimpleMDMpy.SimpleMDM.Connection):
         """deletes custom attribute"""
         url = self.url + "/" + custom_attribute_id
         return self._delete_data(url)
-

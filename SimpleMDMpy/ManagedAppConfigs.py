@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 """managed app configs module for SimpleMDMpy"""
+#pylint: disable=invalid-name
 
 import SimpleMDMpy.SimpleMDM
 
@@ -30,4 +31,4 @@ class ManagedAppConfigs(SimpleMDMpy.SimpleMDM.Connection):
         """Delete managed config from an app by ID."""
         url = self.url + "/" + app_id + "/managed_configs/" + managed_config_id
         data = {}
-        return self._delete_data(url, data)
+        return self._delete_data(url, data) #pylint: disable=too-many-function-args
