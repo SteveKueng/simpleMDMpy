@@ -8,7 +8,7 @@ https://simplemdm.com/docs/api
 
 Your SimpleMDM API key will need to be set as an environmental variable `api_key`.
 
-Help available via `help(SimpleMDMpy)
+Help available via `help(SimpleMDMpy)`
 
 ## Available Modules
 
