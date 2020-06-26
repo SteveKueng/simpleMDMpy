@@ -1,6 +1,4 @@
 *.pyc
 .DS_Store
 
-build/
-dist/
-simpleMDMpy.egg-info/
+.vscode
