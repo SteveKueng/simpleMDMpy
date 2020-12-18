@@ -65,13 +65,13 @@ class AppGroups(SimpleMDMpy.SimpleMDM.Connection):
 
     def assign_device(self, app_group_id, device_id):
         """assign device to app group"""
-        url = self.url + "/" + app_group_id + "/devices/" + device_id
+        url = self.url + "/" + app_group_id + "/devices/" + str(device_id)
         data = {}
         return self._post_data(url, data)
 
     def un_assign_device(self, app_group_id, device_id):
         """unassign apps in app group"""
-        url = self.url + "/" + app_group_id + "/devices/" + device_id
+        url = self.url + "/" + app_group_id + "/devices/" + str(device_id)
         data = {}
         return self._delete_data(url, data) #pylint: disable=too-many-function-args
 
