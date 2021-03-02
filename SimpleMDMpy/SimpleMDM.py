@@ -24,7 +24,7 @@ class Connection(object): #pylint: disable=old-style-class,too-few-public-method
         """base api url"""
         return 'https://a.simplemdm.com/api/v1' + path
 
-    def _get_data(self, url, data=None):
+    def _get_data(self, url, params=None):
         """GET call to SimpleMDM API"""
         start_id = 0
         has_more = True
@@ -32,7 +32,7 @@ class Connection(object): #pylint: disable=old-style-class,too-few-public-method
         base_url = url
         while has_more:
             url = base_url + "?limit=100&starting_after=" + str(start_id)
-            resp = requests.get(url, data, auth=(self.api_key, ""), proxies=self.proxyDict)
+            resp = requests.get(url, params, auth=(self.api_key, ""), proxies=self.proxyDict)
             if not 200 <= resp.status_code <= 207:
                 raise ApiError(f"API returned status code {resp.status_code}")
             resp_json = resp.json()
