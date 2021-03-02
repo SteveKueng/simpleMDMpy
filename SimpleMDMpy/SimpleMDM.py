@@ -24,26 +24,24 @@ class Connection(object): #pylint: disable=old-style-class,too-few-public-method
         """base api url"""
         return 'https://a.simplemdm.com/api/v1' + path
 
-    def _get_data(self, url, data=None):
+    def _get_data(self, url, params=None):
         """GET call to SimpleMDM API"""
-        id = 0 #pylint: disable=invalid-name,redefined-builtin
+        start_id = 0
         has_more = True
         resp_data = []
+        base_url = url
         while has_more:
-            url = url + "?limit=20&starting_after=" + str(id)
-            resp = requests.get(url, data, auth=(self.api_key, ""), proxies=self.proxyDict)
+            url = base_url + "?limit=100&starting_after=" + str(start_id)
+            resp = requests.get(url, params, auth=(self.api_key, ""), proxies=self.proxyDict)
+            if not 200 <= resp.status_code <= 207:
+                raise ApiError(f"API returned status code {resp.status_code}")
             resp_json = resp.json()
-            if not resp.status_code in range(200, 207):
-                break
+            data = resp_json['data']
+            resp_data.extend(data)
             has_more = resp_json.get('has_more', None)
-            if has_more is None:
-                resp_data = resp_json['data']
-                break
-            else:
-                resp_data = resp_data + resp_json['data']
-                id = resp.json()['data'][-1].get('id') #pylint: disable=invalid-name
-        resp_json['data'] = resp_data
-        return resp
+            if has_more:
+                start_id = data[-1].get('id')
+        return resp_data
 
     def _patch_data(self, url, data, files=None):
         """PATCH call to SimpleMDM API"""
