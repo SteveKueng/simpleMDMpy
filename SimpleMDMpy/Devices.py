@@ -120,4 +120,4 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection):
         """set a devices custom attribute to a specific value"""
         url = self.url + "/" + str(device_id) + "/custom_attribute_values/" + custom_attribute_name
         data = {'value': value}
-        return self._get_data(url, data)
+        return self._put_data(url, data)
