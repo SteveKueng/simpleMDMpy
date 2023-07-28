@@ -46,5 +46,4 @@ class Apps(SimpleMDMpy.SimpleMDM.Connection):
     def delete_app(self, app_id):
         """delete an app"""
         url = self.url + "/" + app_id
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args

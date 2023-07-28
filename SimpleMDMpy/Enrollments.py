@@ -28,5 +28,4 @@ class Enrollments(SimpleMDMpy.SimpleMDM.Connection):
     def delete_enrollment(self, enrollment_id):
         """delete enrollment"""
         url = self.url + "/" + enrollment_id
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args

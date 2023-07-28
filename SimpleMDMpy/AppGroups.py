@@ -36,8 +36,7 @@ class AppGroups(SimpleMDMpy.SimpleMDM.Connection):
     def delete_app_group(self, app_group_id):
         """remove app group"""
         url = self.url + "/" + app_group_id
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args
 
     def assign_app(self, app_group_id, app_id):
         """remove app group from group"""
@@ -48,8 +47,7 @@ class AppGroups(SimpleMDMpy.SimpleMDM.Connection):
     def un_assign_app(self, app_group_id, app_id):
         """unassign app from app group"""
         url = self.url + "/" + app_group_id + "/apps/" + app_id
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args
 
     def assign_device_group(self, app_group_id, device_group_id):
         """assign device group from app group"""
@@ -60,8 +58,7 @@ class AppGroups(SimpleMDMpy.SimpleMDM.Connection):
     def un_assign_device_group(self, app_group_id, device_group_id):
         """remove device group from app group"""
         url = self.url + "/" + app_group_id + "/device_groups/" + device_group_id
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args
 
     def assign_device(self, app_group_id, device_id):
         """assign device to app group"""
@@ -72,8 +69,7 @@ class AppGroups(SimpleMDMpy.SimpleMDM.Connection):
     def un_assign_device(self, app_group_id, device_id):
         """unassign apps in app group"""
         url = self.url + "/" + app_group_id + "/devices/" + str(device_id)
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args
 
     def push_apps(self, app_group_id):
         """push apps in app group"""

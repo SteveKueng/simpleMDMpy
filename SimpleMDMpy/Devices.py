@@ -38,8 +38,7 @@ class Devices(SimpleMDMpy.SimpleMDM.Connection):
     def delete_device(self, device_id):
         """Unenroll a device and remove it from the account."""
         url = self.url + "/" + str(device_id)
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args
 
     def list_installed_apps(self, device_id):
         """Returns a listing of the apps installed on a device."""
