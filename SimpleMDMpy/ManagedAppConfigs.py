@@ -30,5 +30,4 @@ class ManagedAppConfigs(SimpleMDMpy.SimpleMDM.Connection):
     def delete_config(self, app_id, managed_config_id):
         """Delete managed config from an app by ID."""
         url = self.url + "/" + app_id + "/managed_configs/" + managed_config_id
-        data = {}
-        return self._delete_data(url, data) #pylint: disable=too-many-function-args
+        return self._delete_data(url) #pylint: disable=too-many-function-args
